@@ -1,0 +1,99 @@
+{
+  "categories": [
+    {
+      "category_id": "life",
+      "name": "Life",
+      "name_translations": {
+        "ja": "人生"
+      },
+      "description": "Quotes about life, living, and existence",
+      "description_translations": {
+        "ja": "人生、生きること、存在に関する名言"
+      },
+      "color": "#3498db",
+      "icon": "heart"
+    },
+    {
+      "category_id": "success",
+      "name": "Success",
+      "name_translations": {
+        "ja": "成功"
+      },
+      "description": "Quotes about achievement and success",
+      "description_translations": {
+        "ja": "達成と成功に関する名言"
+      },
+      "color": "#2ecc71",
+      "icon": "star"
+    },
+    {
+      "category_id": "work",
+      "name": "Work",
+      "name_translations": {
+        "ja": "仕事"
+      },
+      "description": "Quotes about work, career, and profession",
+      "description_translations": {
+        "ja": "仕事、キャリア、職業に関する名言"
+      },
+      "color": "#e74c3c",
+      "icon": "briefcase"
+    },
+    {
+      "category_id": "dreams",
+      "name": "Dreams",
+      "name_translations": {
+        "ja": "夢"
+      },
+      "description": "Quotes about dreams, aspirations, and goals",
+      "description_translations": {
+        "ja": "夢、願望、目標に関する名言"
+      },
+      "color": "#9b59b6",
+      "icon": "moon.stars"
+    },
+    {
+      "category_id": "opportunity",
+      "name": "Opportunity",
+      "name_translations": {
+        "ja": "機会"
+      },
+      "description": "Quotes about opportunities and possibilities",
+      "description_translations": {
+        "ja": "機会と可能性に関する名言"
+      },
+      "color": "#f39c12",
+      "icon": "lightbulb"
+    },
+    {
+      "category_id": "self",
+      "name": "Self",
+      "name_translations": {
+        "ja": "自分"
+      },
+      "description": "Quotes about self-identity and authenticity",
+      "description_translations": {
+        "ja": "自己同一性と真正性に関する名言"
+      },
+      "color": "#1abc9c",
+      "icon": "person"
+    },
+    {
+      "category_id": "change",
+      "name": "Change",
+      "name_translations": {
+        "ja": "変化"
+      },
+      "description": "Quotes about change, transformation, and growth",
+      "description_translations": {
+        "ja": "変化、変革、成長に関する名言"
+      },
+      "color": "#34495e",
+      "icon": "arrow.triangle.2.circlepath"
+    }
+  ],
+  "metadata": {
+    "last_updated": "2025-07-31",
+    "version": "1.0"
+  }
+}

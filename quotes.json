@@ -2,64 +2,125 @@
   "quotes": [
     {
       "id": 1,
-      "text": "人生は一度きり。だからこそ、自分らしく生きよう。",
-      "author": "アルベルト・アインシュタイン",
-      "category": "人生",
-      "language": "ja"
+      "original_text": "Life is like riding a bicycle. To keep your balance, you must keep moving.",
+      "original_language_code": "en",
+      "author_id": "albert_einstein",
+      "category_id": "life",
+      "source": "",
+      "translations": {
+        "ja": {
+          "text": "人生は自転車に乗るようなものだ。バランスを保つためには、動き続けなければならない。"
+        }
+      },
+      "links": []
     },
     {
       "id": 2,
-      "text": "成功とは、失敗から失敗へと情熱を失わずに歩むことである。",
-      "author": "ウィンストン・チャーチル",
-      "category": "成功",
-      "language": "ja"
+      "original_text": "Success is walking from failure to failure with no loss of enthusiasm.",
+      "original_language_code": "en",
+      "author_id": "winston_churchill",
+      "category_id": "success",
+      "source": "",
+      "translations": {
+        "ja": {
+          "text": "成功とは、失敗から失敗へと情熱を失わずに歩むことである。"
+        }
+      },
+      "links": []
     },
     {
       "id": 3,
-      "text": "今日という日は、残りの人生の最初の日である。",
-      "author": "アビー・ホフマン",
-      "category": "人生",
-      "language": "ja"
+      "original_text": "Today is the first day of the rest of your life.",
+      "original_language_code": "en",
+      "author_id": "abbie_hoffman",
+      "category_id": "life",
+      "source": "",
+      "translations": {
+        "ja": {
+          "text": "今日という日は、残りの人生の最初の日である。"
+        }
+      },
+      "links": []
     },
     {
       "id": 4,
-      "text": "The only way to do great work is to love what you do.",
-      "author": "Steve Jobs",
-      "category": "work",
-      "language": "en"
+      "original_text": "The only way to do great work is to love what you do.",
+      "original_language_code": "en",
+      "author_id": "steve_jobs",
+      "category_id": "work",
+      "source": "Stanford Commencement Address, 2005",
+      "translations": {
+        "ja": {
+          "text": "素晴らしい仕事をする唯一の方法は、自分のやっていることを愛することだ。"
+        }
+      },
+      "links": [
+        {
+          "title": "Stanford Commencement Address",
+          "url": "https://news.stanford.edu/2005/06/14/jobs-061505/",
+          "type": "source"
+        }
+      ]
     },
     {
       "id": 5,
-      "text": "夢を見ることができれば、それを実現することもできる。",
-      "author": "ウォルト・ディズニー",
-      "category": "夢",
-      "language": "ja"
+      "original_text": "All our dreams can come true, if we have the courage to pursue them.",
+      "original_language_code": "en",
+      "author_id": "walt_disney",
+      "category_id": "dreams",
+      "source": "",
+      "translations": {
+        "ja": {
+          "text": "勇気を持って追い求めれば、すべての夢は実現できる。"
+        }
+      },
+      "links": []
     },
     {
       "id": 6,
-      "text": "困難の中に、機会がある。",
-      "author": "アルベルト・アインシュタイン",
-      "category": "困難",
-      "language": "ja"
+      "original_text": "In the middle of difficulty lies opportunity.",
+      "original_language_code": "en",
+      "author_id": "albert_einstein",
+      "category_id": "opportunity",
+      "source": "",
+      "translations": {
+        "ja": {
+          "text": "困難の中に、機会がある。"
+        }
+      },
+      "links": []
     },
     {
       "id": 7,
-      "text": "Be yourself; everyone else is already taken.",
-      "author": "Oscar Wilde",
-      "category": "self",
-      "language": "en"
+      "original_text": "Be yourself; everyone else is already taken.",
+      "original_language_code": "en",
+      "author_id": "oscar_wilde",
+      "category_id": "self",
+      "source": "",
+      "translations": {
+        "ja": {
+          "text": "自分らしくあれ。他の人はもうすでにいるのだから。"
+        }
+      },
+      "links": []
     },
     {
       "id": 8,
-      "text": "変化こそが人生の法則である。昨日と今日しか見ない者は、明日を見失う。",
-      "author": "ジョン・F・ケネディ",
-      "category": "変化",
-      "language": "ja"
+      "original_text": "Change is the law of life. And those who look only to the past or present are certain to miss the future.",
+      "original_language_code": "en",
+      "author_id": "john_f_kennedy",
+      "category_id": "change",
+      "source": "Address to the Assembly of the Republic of Panama, 1963",
+      "translations": {
+        "ja": {
+          "text": "変化こそが人生の法則である。過去と現在にのみ目を向ける者は、確実に未来を見失う。"
+        }
+      },
+      "links": []
     }
   ],
   "metadata": {
-    "total": 8,
     "last_updated": "2025-07-31",
-    "version": "1.0"
+    "version": "2.0"
   }
 }

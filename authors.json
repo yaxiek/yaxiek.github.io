@@ -1,0 +1,106 @@
+{
+  "authors": [
+    {
+      "author_id": "albert_einstein",
+      "name": "Albert Einstein",
+      "name_translations": {
+        "ja": "アルベルト・アインシュタイン"
+      },
+      "birth_year": 1879,
+      "death_year": 1955,
+      "nationality": "German-American",
+      "profession": "Theoretical Physicist",
+      "profession_translations": {
+        "ja": "理論物理学者"
+      }
+    },
+    {
+      "author_id": "winston_churchill",
+      "name": "Winston Churchill",
+      "name_translations": {
+        "ja": "ウィンストン・チャーチル"
+      },
+      "birth_year": 1874,
+      "death_year": 1965,
+      "nationality": "British",
+      "profession": "Prime Minister, Writer",
+      "profession_translations": {
+        "ja": "首相、作家"
+      }
+    },
+    {
+      "author_id": "abbie_hoffman",
+      "name": "Abbie Hoffman",
+      "name_translations": {
+        "ja": "アビー・ホフマン"
+      },
+      "birth_year": 1936,
+      "death_year": 1989,
+      "nationality": "American",
+      "profession": "Social Activist",
+      "profession_translations": {
+        "ja": "社会活動家"
+      }
+    },
+    {
+      "author_id": "steve_jobs",
+      "name": "Steve Jobs",
+      "name_translations": {
+        "ja": "スティーブ・ジョブズ"
+      },
+      "birth_year": 1955,
+      "death_year": 2011,
+      "nationality": "American",
+      "profession": "Entrepreneur, Inventor",
+      "profession_translations": {
+        "ja": "起業家、発明家"
+      }
+    },
+    {
+      "author_id": "walt_disney",
+      "name": "Walt Disney",
+      "name_translations": {
+        "ja": "ウォルト・ディズニー"
+      },
+      "birth_year": 1901,
+      "death_year": 1966,
+      "nationality": "American",
+      "profession": "Animator, Film Producer",
+      "profession_translations": {
+        "ja": "アニメーター、映画プロデューサー"
+      }
+    },
+    {
+      "author_id": "oscar_wilde",
+      "name": "Oscar Wilde",
+      "name_translations": {
+        "ja": "オスカー・ワイルド"
+      },
+      "birth_year": 1854,
+      "death_year": 1900,
+      "nationality": "Irish",
+      "profession": "Writer, Poet",
+      "profession_translations": {
+        "ja": "作家、詩人"
+      }
+    },
+    {
+      "author_id": "john_f_kennedy",
+      "name": "John F. Kennedy",
+      "name_translations": {
+        "ja": "ジョン・F・ケネディ"
+      },
+      "birth_year": 1917,
+      "death_year": 1963,
+      "nationality": "American",
+      "profession": "35th President of the United States",
+      "profession_translations": {
+        "ja": "第35代アメリカ合衆国大統領"
+      }
+    }
+  ],
+  "metadata": {
+    "last_updated": "2025-07-31",
+    "version": "1.0"
+  }
+}
