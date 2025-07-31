@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名言データベース</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .quote {
+            border-left: 4px solid #007AFF;
+            padding-left: 20px;
+            margin: 20px 0;
+            background: #f9f9f9;
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+        .quote-text {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .quote-author {
+            color: #666;
+            font-style: italic;
+        }
+        .api-info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 名言データベース</h1>
+        <div class="api-info">
+            <h3>API エンドポイント</h3>
+            <p><strong>全ての名言を取得:</strong> <code>quotes.json</code></p>
+            <p>このJSONファイルには、iOSアプリで表示される名言データが含まれています。</p>
+        </div>
+        
+        <h2>サンプル名言</h2>
+        <div id="quotes-container">
+            <!-- ここに名言が動的に表示されます -->
+        </div>
+    </div>
+
+    <script>
+        fetch('quotes.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('quotes-container');
+                data.quotes.forEach(quote => {
+                    const quoteDiv = document.createElement('div');
+                    quoteDiv.className = 'quote';
+                    quoteDiv.innerHTML = `
+                        <div class="quote-text">"${quote.text}"</div>
+                        <div class="quote-author">— ${quote.author}</div>
+                    `;
+                    container.appendChild(quoteDiv);
+                });
+            })
+            .catch(error => console.error('Error loading quotes:', error));
+    </script>
+</body>
+</html>

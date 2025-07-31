@@ -1,0 +1,65 @@
+{
+  "quotes": [
+    {
+      "id": 1,
+      "text": "人生は一度きり。だからこそ、自分らしく生きよう。",
+      "author": "アルベルト・アインシュタイン",
+      "category": "人生",
+      "language": "ja"
+    },
+    {
+      "id": 2,
+      "text": "成功とは、失敗から失敗へと情熱を失わずに歩むことである。",
+      "author": "ウィンストン・チャーチル",
+      "category": "成功",
+      "language": "ja"
+    },
+    {
+      "id": 3,
+      "text": "今日という日は、残りの人生の最初の日である。",
+      "author": "アビー・ホフマン",
+      "category": "人生",
+      "language": "ja"
+    },
+    {
+      "id": 4,
+      "text": "The only way to do great work is to love what you do.",
+      "author": "Steve Jobs",
+      "category": "work",
+      "language": "en"
+    },
+    {
+      "id": 5,
+      "text": "夢を見ることができれば、それを実現することもできる。",
+      "author": "ウォルト・ディズニー",
+      "category": "夢",
+      "language": "ja"
+    },
+    {
+      "id": 6,
+      "text": "困難の中に、機会がある。",
+      "author": "アルベルト・アインシュタイン",
+      "category": "困難",
+      "language": "ja"
+    },
+    {
+      "id": 7,
+      "text": "Be yourself; everyone else is already taken.",
+      "author": "Oscar Wilde",
+      "category": "self",
+      "language": "en"
+    },
+    {
+      "id": 8,
+      "text": "変化こそが人生の法則である。昨日と今日しか見ない者は、明日を見失う。",
+      "author": "ジョン・F・ケネディ",
+      "category": "変化",
+      "language": "ja"
+    }
+  ],
+  "metadata": {
+    "total": 8,
+    "last_updated": "2025-07-31",
+    "version": "1.0"
+  }
+}
