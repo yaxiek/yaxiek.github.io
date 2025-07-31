@@ -24,16 +24,19 @@
         }
         .quote {
             border-left: 4px solid #007AFF;
-            padding-left: 20px;
-            margin: 20px 0;
+            margin: 30px 0;
             background: #f9f9f9;
-            padding: 15px 20px;
-            border-radius: 5px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
         }
         .quote-text {
-            font-size: 18px;
+            font-size: 24px;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-weight: 300;
         }
         .quote-author {
             color: #666;
@@ -48,22 +51,44 @@
         .language-switcher {
             text-align: center;
             margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
         }
-        .language-btn {
-            background: #007AFF;
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #007AFF;
+        }
+        .radio-item label {
+            font-size: 16px;
+            cursor: pointer;
+            color: #333;
+        }
+        .new-quote-btn {
+            background: #28a745;
             color: white;
             border: none;
-            padding: 8px 16px;
-            margin: 0 5px;
-            border-radius: 20px;
+            padding: 12px 24px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
+            margin: 20px auto;
+            display: block;
         }
-        .language-btn:hover {
-            background: #0056b3;
-        }
-        .language-btn.active {
-            background: #28a745;
+        .new-quote-btn:hover {
+            background: #218838;
         }
         .original-text {
             font-style: italic;
@@ -113,23 +138,36 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="main-title">📝 名言データベース</h1>
+        <h1 id="main-title">📝 今日の名言</h1>
         
         <div class="language-switcher">
-            <button class="language-btn active" data-lang="ja">日本語</button>
-            <button class="language-btn" data-lang="en">English</button>
-            <button class="language-btn" data-lang="zh-TW">繁體中文</button>
+            <h3 id="language-title">表示言語</h3>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="lang-ja" name="language" value="ja" checked>
+                    <label for="lang-ja">日本語</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="lang-en" name="language" value="en">
+                    <label for="lang-en">English</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="lang-zh-tw" name="language" value="zh-TW">
+                    <label for="lang-zh-tw">繁體中文</label>
+                </div>
+            </div>
         </div>
+        
+        <div id="quote-container">
+            <!-- ここに1つの名言が表示されます -->
+        </div>
+        
+        <button class="new-quote-btn" id="new-quote-btn">新しい名言</button>
         
         <div class="api-info">
             <h3 id="api-title">API エンドポイント</h3>
-            <p><strong id="api-desc">全ての名言を取得:</strong> <code>quotes.json</code>, <code>authors.json</code>, <code>categories.json</code></p>
-            <p id="api-note">このJSONファイルには、iOSアプリで表示される名言データが含まれています。</p>
-        </div>
-        
-        <h2 id="sample-title">サンプル名言</h2>
-        <div id="quotes-container">
-            <!-- ここに名言が動的に表示されます -->
+            <p><strong id="api-desc">データファイル:</strong> <code>quotes.json</code>, <code>authors.json</code>, <code>categories.json</code></p>
+            <p id="api-note">このJSONファイルには、名言データが含まれています。</p>
         </div>
     </div>
 
@@ -138,31 +176,38 @@
         let authorsData = null;
         let categoriesData = null;
         let currentLanguage = 'ja';
+        let currentQuoteIndex = 0;
 
         const translations = {
             ja: {
-                title: '📝 名言データベース',
+                title: '📝 今日の名言',
+                languageTitle: '表示言語',
+                newQuoteBtn: '新しい名言',
                 apiTitle: 'API エンドポイント',
-                apiDesc: '全ての名言を取得:',
-                apiNote: 'このJSONファイルには、iOSアプリで表示される名言データが含まれています。',
-                sampleTitle: 'サンプル名言',
-                original: '原文'
+                apiDesc: 'データファイル:',
+                apiNote: 'このJSONファイルには、名言データが含まれています。',
+                original: '原文',
+                source: '出典'
             },
             en: {
-                title: '📝 Quote Database',
+                title: '📝 Quote of the Day',
+                languageTitle: 'Display Language',
+                newQuoteBtn: 'New Quote',
                 apiTitle: 'API Endpoints',
-                apiDesc: 'Get all quotes:',
-                apiNote: 'These JSON files contain quote data displayed in the iOS app.',
-                sampleTitle: 'Sample Quotes',
-                original: 'Original'
+                apiDesc: 'Data Files:',
+                apiNote: 'These JSON files contain quote data.',
+                original: 'Original',
+                source: 'Source'
             },
             'zh-TW': {
-                title: '📝 名言資料庫',
+                title: '📝 今日名言',
+                languageTitle: '顯示語言',
+                newQuoteBtn: '新名言',
                 apiTitle: 'API 端點',
-                apiDesc: '獲取所有名言:',
-                apiNote: '這些JSON檔案包含iOS應用程式中顯示的名言資料。',
-                sampleTitle: '範例名言',
-                original: '原文'
+                apiDesc: '資料檔案:',
+                apiNote: '這些JSON檔案包含名言資料。',
+                original: '原文',
+                source: '出處'
             }
         };
 
@@ -176,7 +221,7 @@
             quotesData = quotes;
             authorsData = authors;
             categoriesData = categories;
-            renderQuotes();
+            showRandomQuote();
         })
         .catch(error => console.error('Error loading data:', error));
 
@@ -207,41 +252,43 @@
             return quote.original_text;
         }
 
-        function renderQuotes() {
+        function showRandomQuote() {
             if (!quotesData || !authorsData || !categoriesData) return;
             
-            const container = document.getElementById('quotes-container');
-            container.innerHTML = '';
+            // Get random quote
+            currentQuoteIndex = Math.floor(Math.random() * quotesData.quotes.length);
+            renderCurrentQuote();
+        }
+
+        function renderCurrentQuote() {
+            const quote = quotesData.quotes[currentQuoteIndex];
+            const container = document.getElementById('quote-container');
             
-            quotesData.quotes.forEach(quote => {
-                const quoteDiv = document.createElement('div');
-                quoteDiv.className = 'quote';
-                
-                const text = getQuoteText(quote, currentLanguage);
-                const authorName = getAuthorName(quote.author_id, currentLanguage);
-                const categoryName = getCategoryName(quote.category_id, currentLanguage);
-                const showOriginal = quote.translations?.[currentLanguage] && text !== quote.original_text;
-                
-                let linksHtml = '';
-                if (quote.links && quote.links.length > 0) {
-                    linksHtml = '<div class="quote-links">' +
-                        quote.links.map(link => `<a href="${link.url}" target="_blank">${link.title}</a>`).join('') +
-                        '</div>';
-                }
-                
-                quoteDiv.innerHTML = `
+            const text = getQuoteText(quote, currentLanguage);
+            const authorName = getAuthorName(quote.author_id, currentLanguage);
+            const categoryName = getCategoryName(quote.category_id, currentLanguage);
+            const showOriginal = quote.translations?.[currentLanguage] && text !== quote.original_text;
+            
+            let linksHtml = '';
+            if (quote.links && quote.links.length > 0) {
+                linksHtml = '<div class="quote-links">' +
+                    quote.links.map(link => `<a href="${link.url}" target="_blank">${link.title}</a>`).join('') +
+                    '</div>';
+            }
+            
+            container.innerHTML = `
+                <div class="quote">
                     <div class="quote-text">"${text}"</div>
                     ${showOriginal ? `<div class="original-text">${translations[currentLanguage].original}: "${quote.original_text}"</div>` : ''}
                     <div class="quote-author">— ${authorName}</div>
-                    ${quote.source ? `<div class="quote-source">出典: ${quote.source}</div>` : ''}
+                    ${quote.source ? `<div class="quote-source">${translations[currentLanguage].source}: ${quote.source}</div>` : ''}
                     <div class="quote-meta">
                         <span class="tag category">${categoryName}</span>
                         <span class="tag language">${quote.original_language_code.toUpperCase()}</span>
                     </div>
                     ${linksHtml}
-                `;
-                container.appendChild(quoteDiv);
-            });
+                </div>
+            `;
         }
 
         function switchLanguage(language) {
@@ -249,29 +296,27 @@
             
             // Update UI text
             document.getElementById('main-title').textContent = translations[language].title;
+            document.getElementById('language-title').textContent = translations[language].languageTitle;
+            document.getElementById('new-quote-btn').textContent = translations[language].newQuoteBtn;
             document.getElementById('api-title').textContent = translations[language].apiTitle;
             document.getElementById('api-desc').textContent = translations[language].apiDesc;
             document.getElementById('api-note').textContent = translations[language].apiNote;
-            document.getElementById('sample-title').textContent = translations[language].sampleTitle;
             
-            // Update active button
-            document.querySelectorAll('.language-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.lang === language) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Re-render quotes
-            renderQuotes();
+            // Re-render current quote
+            renderCurrentQuote();
         }
 
-        // Add event listeners for language buttons
-        document.querySelectorAll('.language-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                switchLanguage(btn.dataset.lang);
+        // Add event listeners for radio buttons
+        document.querySelectorAll('input[name="language"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    switchLanguage(e.target.value);
+                }
             });
         });
+
+        // Add event listener for new quote button
+        document.getElementById('new-quote-btn').addEventListener('click', showRandomQuote);
     </script>
 </body>
 </html>
