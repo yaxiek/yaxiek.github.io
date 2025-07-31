@@ -45,39 +45,233 @@
             border-radius: 5px;
             margin: 20px 0;
         }
+        .language-switcher {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .language-btn {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .language-btn:hover {
+            background: #0056b3;
+        }
+        .language-btn.active {
+            background: #28a745;
+        }
+        .original-text {
+            font-style: italic;
+            color: #888;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .quote-meta {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            background: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #666;
+        }
+        .tag.category {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        .tag.language {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        .quote-source {
+            color: #888;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        .quote-links {
+            margin-top: 10px;
+        }
+        .quote-links a {
+            color: #007AFF;
+            text-decoration: none;
+            font-size: 14px;
+            margin-right: 15px;
+        }
+        .quote-links a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📝 名言データベース</h1>
-        <div class="api-info">
-            <h3>API エンドポイント</h3>
-            <p><strong>全ての名言を取得:</strong> <code>quotes.json</code></p>
-            <p>このJSONファイルには、iOSアプリで表示される名言データが含まれています。</p>
+        <h1 id="main-title">📝 名言データベース</h1>
+        
+        <div class="language-switcher">
+            <button class="language-btn active" data-lang="ja">日本語</button>
+            <button class="language-btn" data-lang="en">English</button>
+            <button class="language-btn" data-lang="zh-TW">繁體中文</button>
         </div>
         
-        <h2>サンプル名言</h2>
+        <div class="api-info">
+            <h3 id="api-title">API エンドポイント</h3>
+            <p><strong id="api-desc">全ての名言を取得:</strong> <code>quotes.json</code>, <code>authors.json</code>, <code>categories.json</code></p>
+            <p id="api-note">このJSONファイルには、iOSアプリで表示される名言データが含まれています。</p>
+        </div>
+        
+        <h2 id="sample-title">サンプル名言</h2>
         <div id="quotes-container">
             <!-- ここに名言が動的に表示されます -->
         </div>
     </div>
 
     <script>
-        fetch('quotes.json')
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('quotes-container');
-                data.quotes.forEach(quote => {
-                    const quoteDiv = document.createElement('div');
-                    quoteDiv.className = 'quote';
-                    quoteDiv.innerHTML = `
-                        <div class="quote-text">"${quote.text}"</div>
-                        <div class="quote-author">— ${quote.author}</div>
-                    `;
-                    container.appendChild(quoteDiv);
-                });
-            })
-            .catch(error => console.error('Error loading quotes:', error));
+        let quotesData = null;
+        let authorsData = null;
+        let categoriesData = null;
+        let currentLanguage = 'ja';
+
+        const translations = {
+            ja: {
+                title: '📝 名言データベース',
+                apiTitle: 'API エンドポイント',
+                apiDesc: '全ての名言を取得:',
+                apiNote: 'このJSONファイルには、iOSアプリで表示される名言データが含まれています。',
+                sampleTitle: 'サンプル名言',
+                original: '原文'
+            },
+            en: {
+                title: '📝 Quote Database',
+                apiTitle: 'API Endpoints',
+                apiDesc: 'Get all quotes:',
+                apiNote: 'These JSON files contain quote data displayed in the iOS app.',
+                sampleTitle: 'Sample Quotes',
+                original: 'Original'
+            },
+            'zh-TW': {
+                title: '📝 名言資料庫',
+                apiTitle: 'API 端點',
+                apiDesc: '獲取所有名言:',
+                apiNote: '這些JSON檔案包含iOS應用程式中顯示的名言資料。',
+                sampleTitle: '範例名言',
+                original: '原文'
+            }
+        };
+
+        // Load all data files
+        Promise.all([
+            fetch('quotes.json').then(r => r.json()),
+            fetch('authors.json').then(r => r.json()),
+            fetch('categories.json').then(r => r.json())
+        ])
+        .then(([quotes, authors, categories]) => {
+            quotesData = quotes;
+            authorsData = authors;
+            categoriesData = categories;
+            renderQuotes();
+        })
+        .catch(error => console.error('Error loading data:', error));
+
+        function getAuthorName(authorId, language) {
+            const author = authorsData.authors.find(a => a.author_id === authorId);
+            if (!author) return authorId.replace(/_/g, ' ');
+            
+            if (language === 'en' || !author.name_translations?.[language]) {
+                return author.name;
+            }
+            return author.name_translations[language];
+        }
+
+        function getCategoryName(categoryId, language) {
+            const category = categoriesData.categories.find(c => c.category_id === categoryId);
+            if (!category) return categoryId.replace(/_/g, ' ');
+            
+            if (language === 'en' || !category.name_translations?.[language]) {
+                return category.name;
+            }
+            return category.name_translations[language];
+        }
+
+        function getQuoteText(quote, language) {
+            if (quote.translations?.[language]) {
+                return quote.translations[language].text;
+            }
+            return quote.original_text;
+        }
+
+        function renderQuotes() {
+            if (!quotesData || !authorsData || !categoriesData) return;
+            
+            const container = document.getElementById('quotes-container');
+            container.innerHTML = '';
+            
+            quotesData.quotes.forEach(quote => {
+                const quoteDiv = document.createElement('div');
+                quoteDiv.className = 'quote';
+                
+                const text = getQuoteText(quote, currentLanguage);
+                const authorName = getAuthorName(quote.author_id, currentLanguage);
+                const categoryName = getCategoryName(quote.category_id, currentLanguage);
+                const showOriginal = quote.translations?.[currentLanguage] && text !== quote.original_text;
+                
+                let linksHtml = '';
+                if (quote.links && quote.links.length > 0) {
+                    linksHtml = '<div class="quote-links">' +
+                        quote.links.map(link => `<a href="${link.url}" target="_blank">${link.title}</a>`).join('') +
+                        '</div>';
+                }
+                
+                quoteDiv.innerHTML = `
+                    <div class="quote-text">"${text}"</div>
+                    ${showOriginal ? `<div class="original-text">${translations[currentLanguage].original}: "${quote.original_text}"</div>` : ''}
+                    <div class="quote-author">— ${authorName}</div>
+                    ${quote.source ? `<div class="quote-source">出典: ${quote.source}</div>` : ''}
+                    <div class="quote-meta">
+                        <span class="tag category">${categoryName}</span>
+                        <span class="tag language">${quote.original_language_code.toUpperCase()}</span>
+                    </div>
+                    ${linksHtml}
+                `;
+                container.appendChild(quoteDiv);
+            });
+        }
+
+        function switchLanguage(language) {
+            currentLanguage = language;
+            
+            // Update UI text
+            document.getElementById('main-title').textContent = translations[language].title;
+            document.getElementById('api-title').textContent = translations[language].apiTitle;
+            document.getElementById('api-desc').textContent = translations[language].apiDesc;
+            document.getElementById('api-note').textContent = translations[language].apiNote;
+            document.getElementById('sample-title').textContent = translations[language].sampleTitle;
+            
+            // Update active button
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === language) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Re-render quotes
+            renderQuotes();
+        }
+
+        // Add event listeners for language buttons
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchLanguage(btn.dataset.lang);
+            });
+        });
     </script>
 </body>
 </html>
